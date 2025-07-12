@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Actor&family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Numbers Game</title>
+  </head>
+  <body>
+    <div id="main" class="main">
+      <div class="nav">
+        <h1>Numbers Game</h1>
+        <a id="infobutton" title="Instructions" onclick="info()" style="text-decoration: none"><img src="assets/info.png" alt="Info" height="30"></a>
+      </div>
+      <div id="main_container" class="main_container">
+        <div class="bottom">
+            <input
+              id="input"
+              type="number"
+              oninput="validateInput()"
+              placeholder="Guess Here..."
+            />
+            <div id="timer-cont" class="timer-cont">
+              <span>Timer</span>
+            </div>
+            <div class="buttons">
+              <button id="restart" onclick="restart()">Restart</button>
+              <button id="check" onclick="check()">Check</button>
+            </div>
+          </div>
+        
+        <div class="middle">
+          <div class="table_prev">
+            <table id="table_history">
+               <thead>
+                <tr>
+                    <th scope="col" style="color: #ff92ae; width: 5%">#</span></th>
+                    <th scope="col" style="width: 30%">Guessed Numbers</span></th>
+                    <th scope="col" style="color: #a6b7d4; width: 25%">Correct Numbers</span></th>
+                    <th scope="col" style="color: #67e9f1; width: 25%">Correct Positions</span></th>
+                    </tr>
+               </thead>
+                <tbody>
+    
+                </tbody>
+            </table>
+          </div>
+          <!-- <ol reversed id="list_for_guessed"></ol> -->
+        </div>
+
+        <!-- <div class="top">
+          <div class="left">
+            <li style="text-decoration: none; color: #a6b7d4" id="correct_nums">
+              0
+            </li>
+            <span style="color: #a6b7d4" class="lable">Correct Numbers</span>
+            <li style="color: #67e9f1" id="correct_pos">0</li>
+            <span style="color: #67e9f1" class="lable">Correct Positions</span>
+            <li style="color: #ff92ae" id="tries">0</li>
+            <span style="color: #ff92ae" class="lable">Tries</span>
+          </div>
+          <div class="right">
+            <div class="circle">
+              <h1 id="num_display">-</h1>
+            </div>
+          </div>
+        </div> -->
+        
+      </div>
+      <div id="info" class="info">
+        <h1>Numbers Game</h1>
+        <h2>Instructions:</h2>
+        <p>This is a Number Guessing game. At the start, the game will pick a four digit number. What you do to play is to guess a four digit number.</p>
+        <p>The digits in the number will be unique, there will not be repititions. The digits range from 1 to 9. At every try the game will notify you the number of correct digits you get and also how many of those positions is correct.</p>
+        <p>You have to deduce and find the number from the previously guessed list.</p>
+        <h3>Good Luck!</h3>
+      </div>
+    </div>
+
+    <div id="congrats" class="congrats">
+      <h2>Congratulations !!</h2>
+      <p>The Number is</p>
+      <h1 id="corres"></h1>
+      <p class="triesDisp">Number of tries: <span id="finaltries"></span></p>
+      <p class="triesDisp">Time taken: <span id="timetaken"></span></p>
+      <button onclick="back()">Back</button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
