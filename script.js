@@ -56,7 +56,6 @@ function check(){
         document.getElementById("input").focus();
         }
         else{
-            displayOnDisplay(curr_num, res[2], res[1]);
             addRow(curr_num, res[2], res[1]);
             clearInterval(timer);
             document.getElementById("main").style.display = "none";
