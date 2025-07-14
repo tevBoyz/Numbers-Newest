@@ -9,7 +9,6 @@ var time = 0;
 var timer = '';
 
 var num_to_Guess = random4Digit();
-console.log(num_to_Guess)
 // var num_to_Guess = 2134;
 
 var input = document.getElementById("input");
@@ -202,30 +201,6 @@ function validateInput() {
       for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
       return o;
   }
-  
-
-document.addEventListener('DOMContentLoaded', function() {
-  const darkModeToggle = document.getElementById('darkModeToggle');
-  
-  // Check for saved user preference
-  const savedMode = localStorage.getItem('darkMode');
-  if (savedMode === 'enabled' || 
-      (savedMode === null && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    document.body.classList.add('dark-mode');
-  }
-  
-  // Toggle dark mode
-  darkModeToggle.addEventListener('click', function() {
-    document.body.classList.toggle('dark-mode');
-    
-    // Save user preference
-    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
-  });
-  
-  // Focus input on load
-  input.focus();
-});
-
   
 window.onload = function() {
     input.focus();
