@@ -202,6 +202,33 @@ function validateInput() {
       return o;
   }
   
+
+document.addEventListener('DOMContentLoaded', function() {
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  
+  // Check for saved user preference
+  const savedMode = localStorage.getItem('darkMode');
+  if (savedMode === 'enabled' || 
+      (savedMode === null && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.body.classList.add('dark-mode');
+  }
+  
+  // Toggle dark mode
+  darkModeToggle.addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+    if(darkModeToggle.innerText == '🌞')
+        darkModeToggle.innerText = '🌙'
+    else
+        darkModeToggle.innerText = '🌞'
+    // Save user preference
+    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
+  });
+  
+  // Focus input on load
+  input.focus();
+});
+
+  
 window.onload = function() {
     input.focus();
     // startTimer();
