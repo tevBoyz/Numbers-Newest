@@ -70,24 +70,31 @@ body {
   flex: 9;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
-  padding: 20px;
+  padding: 30px;
+  margin-top: 30px;
   background-color: white;
   border-radius: 0 0 15px 15px;
+  gap: 20px;
 }
 
 /* Info Section */
 .info {
-  width: 100%;
+  width: 90%;
   flex: 9;
   display: none;
   flex-direction: column;
   align-items: center;
-  padding: 30px;
+  padding: 40px;
   background-color: white;
   border-radius: 0 0 15px 15px;
   overflow-y: auto;
+  margin: 20px;
+}
+
+#infobutton {
+  transition: all 0.3s ease; /* Smooth transitions for button */
 }
 
 .info h1 {
@@ -178,7 +185,7 @@ body {
 
 .middle {
   width: 100%;
-  flex: 2;
+  /* flex: 2; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -221,7 +228,7 @@ tr:hover {
 /* Input Area */
 .bottom {
   width: 90%;
-  flex: 1;
+  /* flex: 1; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -241,6 +248,31 @@ input {
   padding: 0 20px;
   transition: all 0.3s ease;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.floating-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  color: #999;
+  font-style: italic;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.input-container input:focus + .floating-message,
+.input-container input:not(:placeholder-shown) + .floating-message {
+  opacity: 0;
+  transform: translate(-50%, -20%);
 }
 
 input:focus {
@@ -429,4 +461,271 @@ button {
   .congrats h1 {
     font-size: 2rem;
   }
+}
+
+/* Button and Input Group Styles */
+.input-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1rem;
+  width: 100%;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.input-container {
+  position: relative;
+  flex-grow: 1;
+  max-width: 400px;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+#restart,
+#check {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+#restart {
+  background-color: #f5f9ff;
+  color: #4a5568;
+}
+
+#check {
+  background: linear-gradient(135deg, #f95d47 0%, #ff7b65 100%);
+  color: white;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .input-group {
+    gap: 8px;
+  }
+
+  #restart,
+  #check {
+    width: 40px;
+    height: 40px;
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .input-group {
+    gap: 5px;
+  }
+
+  #restart,
+  #check {
+    width: 36px;
+    height: 36px;
+  }
+
+  .icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  input {
+    height: 50px;
+    font-size: 1rem;
+  }
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+  background: linear-gradient(135deg, #121212 0%, #1a1a1a 100%);
+  color: #e2e8f0;
+}
+
+body.dark-mode .main_container,
+body.dark-mode .info,
+body.dark-mode .congrats,
+body.dark-mode .table_prev,
+body.dark-mode .top,
+body.dark-mode .bottom {
+  background-color: #1e1e1e;
+  color: #e2e8f0;
+}
+
+body.dark-mode input {
+  background-color: #2d3748;
+  color: #f8fafc;
+  border-color: #4a5568;
+}
+
+body.dark-mode table {
+  color: #e2e8f0;
+}
+
+body.dark-mode th {
+  background-color: #2d3748;
+}
+
+body.dark-mode tr {
+  background-color: #2d3748;
+}
+
+body.dark-mode tr:hover {
+  background-color: #3c485c;
+}
+
+body.dark-mode td {
+  border-bottom-color: #4a5568;
+}
+
+body.dark-mode #restart {
+  background-color: #2d3748;
+  color: #e2e8f0;
+}
+
+body.dark-mode #restart:hover {
+  background-color: #3c485c;
+}
+
+body.dark-mode .circle {
+  background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+  border-color: #f95d47;
+  color: #f8fafc;
+}
+
+body.dark-mode .floating-message {
+  color: #a0aec0;
+}
+
+/* Dark mode toggle button styles */
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+#darkModeToggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#darkModeToggle .icon {
+  width: 24px;
+  height: 24px;
+  fill: white;
+}
+
+#darkModeToggle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Show/hide sun/moon icons based on mode */
+body.dark-mode .moon-icon {
+  display: none;
+}
+
+body.dark-mode .sun-icon {
+  display: block;
+}
+
+body:not(.dark-mode) .moon-icon {
+  display: block;
+}
+
+body:not(.dark-mode) .sun-icon {
+  display: none;
+}
+
+/* Nav Controls */
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-right: 10px;
+}
+
+/* Dark Mode Toggle */
+#darkModeToggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+#darkModeToggle:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Info Button */
+#infobutton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+#infobutton:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Icons */
+.icon {
+  width: 24px;
+  height: 24px;
+  transition: all 0.3s ease;
+}
+
+/* Dark mode specific styles */
+body.dark-mode #darkModeToggle:hover,
+body.dark-mode #infobutton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Icon visibility control */
+.moon-icon {
+  display: none;
+}
+.sun-icon {
+  display: block;
+}
+
+body.dark-mode .moon-icon {
+  display: block;
+}
+body.dark-mode .sun-icon {
+  display: none;
 }

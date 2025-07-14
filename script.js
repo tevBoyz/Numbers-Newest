@@ -9,9 +9,11 @@ var time = 0;
 var timer = '';
 
 var num_to_Guess = random4Digit();
+console.log(num_to_Guess)
 // var num_to_Guess = 2134;
 
 var input = document.getElementById("input");
+var firstTime = true;
 
 // Execute a function when the user presses a key on the keyboard
 input.addEventListener("keypress", function(event) {
@@ -44,8 +46,36 @@ function compare(guessed_num){
     }
 }
 
+function formatTime(totalSeconds) {
+    // Calculate hours, minutes, and seconds
+    let hours = Math.floor(totalSeconds / 3600);
+    let minutes = Math.floor((totalSeconds % 3600) / 60);
+    let seconds = totalSeconds % 60;
+    
+    // Add leading zeros
+    hours = hours.toString().padStart(2, '0');
+    minutes = minutes.toString().padStart(2, '0');
+    seconds = seconds.toString().padStart(2, '0');
+    
+    return `${hours}:${minutes}:${seconds}`;
+}
+
+function startTimer(){
+    var timerEl = document.getElementById("timer-cont");
+    timerEl.innerHTML = `<span>Time elapsed: 00:00:00</span>`;
+    timer = setInterval(() => {
+            time++;
+            let formattedTime = formatTime(time);
+            timerEl.innerHTML = `<span>Time elapsed: ${formattedTime}</span>`;
+    }, 1000);
+  }
+
 
 function check(){
+    if(firstTime) {
+        startTimer();
+        firstTime = false;
+    }
     curr_num = document.getElementById("input").value;
     if (curr_num >= 1000 && curr_num <= 9999){
         document.getElementById("input").classList.remove("red")
@@ -62,11 +92,11 @@ function check(){
             document.getElementById("congrats").style.display = "flex";
             document.getElementById("corres").innerHTML = curr_num;
             document.getElementById("finaltries").innerHTML = guessed.length;
-            document.getElementById("timetaken").innerHTML = `${time}s`;
+            document.getElementById("timetaken").innerHTML = formatTime(time) + 's';
         }
     }
     else{
-        alert('Please enter exactly 4 digits. No Zeroes, No repititions');
+        alert('Please enter 4 digits to check. No Zeroes and No repititions');
         curr_num = document.getElementById("new_number").value = "";
         document.getElementById("new_number").focus();
     }
@@ -109,6 +139,16 @@ function getRightNums(guessed, answer){
 function validateInput() {
     const input = document.getElementById('input');
     const value = input.value;
+    const floatingMsg = document.querySelector('.floating-message');
+    
+    // Hide floating message when typing
+    if (value.length > 0) {
+        floatingMsg.style.display = 'none';
+    } else {
+        floatingMsg.style.display = 'block';
+    }
+
+
     let c = String(value).split('').map(Number);
 
     if (value.length > 4 || isNaN(value)) {
@@ -125,21 +165,27 @@ function validateInput() {
     }
   }
 
-  function info(){
-    if(document.getElementById('info').style.display == 'none'){
-        document.getElementById('info').style.display = 'flex';
-        document.getElementById('info').style.flexDirection = 'column';
-        document.getElementById('infobutton').style.backgroundColor = 'white';
-        document.getElementById('infobutton').style.color = 'rgba(249, 93, 71, 0.75)';
-        document.getElementById('main_container').style.display = 'none';
+  function info() {
+    const infoDiv = document.getElementById('info');
+    const infoButton = document.getElementById('infobutton');
+    const mainContainer = document.getElementById('main_container');
+    
+    // Toggle based on current display state
+    if (infoDiv.style.display !== 'flex') {
+        // Show info
+        infoDiv.style.display = 'flex';
+        infoDiv.style.flexDirection = 'column';
+        infoButton.style.backgroundColor = 'white';
+        infoButton.style.color = 'rgba(249, 93, 71, 0.75)';
+        mainContainer.style.display = 'none';
+    } else {
+        // Hide info
+        infoDiv.style.display = 'none';
+        infoButton.style.backgroundColor = '';
+        infoButton.style.color = '';
+        mainContainer.style.display = 'flex';
     }
-    else{
-        document.getElementById('info').style.display = 'none';
-        document.getElementById('infobutton').style.backgroundColor = 'rgba(249, 93, 71, 0.75)';
-        document.getElementById('infobutton').style.color = 'white'
-        document.getElementById('main_container').style.display = 'flex';
-    }
-  }
+}
 
   function hasDuplicates(a) {
 
@@ -158,15 +204,30 @@ function validateInput() {
   }
   
 
-  function startTimer(){
-    var timerEl = document.getElementById("timer-cont");
-    timerEl.innerHTML = `<span>Time elapsed: ${time}</span>`
-    timer = setInterval(() => {
-            let cont = `<span>Time elapsed: ${++time}s</span>`;
-            timerEl.innerHTML = cont;
-    }, 1000);
+document.addEventListener('DOMContentLoaded', function() {
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  
+  // Check for saved user preference
+  const savedMode = localStorage.getItem('darkMode');
+  if (savedMode === 'enabled' || 
+      (savedMode === null && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.body.classList.add('dark-mode');
   }
+  
+  // Toggle dark mode
+  darkModeToggle.addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+    
+    // Save user preference
+    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
+  });
+  
+  // Focus input on load
+  input.focus();
+});
 
+  
 window.onload = function() {
-    startTimer();
+    input.focus();
+    // startTimer();
 };
